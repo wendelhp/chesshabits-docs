@@ -46,7 +46,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
   <div class="kicker">Chess Habits</div>
   <h1>Documentação Metodológica</h1>
   <p class="subtitle">Como o aplicativo avalia hábitos de abertura, <strong>Tática / Meio Jogo</strong> por heurística e análise Stockfish sob demanda.</p>
-  <div class="hero-meta"><span class="pill">Versão 7.1.9h</span><span class="pill">Atualizada em 01/06/2026</span><span class="pill">Metodologia transparente e auditável</span></div>
+  <div class="hero-meta"><span class="pill">Versão 7.2.2b</span><span class="pill">Atualizada em 01/06/2026</span><span class="pill">Metodologia transparente e auditável</span></div>
   <div class="actions"><a class="button" href="documentacao-metodologica-v7.2.2b.pdf">Baixar PDF</a><a class="button secondary" href="https://chesshabits.app">Abrir aplicativo</a></div>
  </div>
 </header>
@@ -74,7 +74,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
 <h2>1. Escopo e filosofia do aplicativo</h2>
 <p class="lead"><strong>Chess Habits</strong> é uma ferramenta independente de acompanhamento de padrões enxadrísticos. Ela não foi criada para substituir uma engine nem para afirmar que todo lance diferente da recomendação do computador está errado.</p>
 <div class="callout"><strong>Projeto independente:</strong> inspirado em princípios didáticos da série <em>Building Habits</em>, criada pelo GM Aman Hambleton. Não possui vínculo oficial com Chess.com, Chessbrah ou Aman Hambleton. O Chess.com é citado como fonte das partidas públicas importadas pelo aplicativo.</div>
-<p>O objetivo é identificar comportamentos recorrentes que ajudam o jogador a construir uma base mais estável. A versão 7.1.9h trabalha com três camadas complementares:</p>
+<p>O objetivo é identificar comportamentos recorrentes que ajudam o jogador a construir uma base mais estável. O app trabalha com três camadas complementares:</p>
 <ul>
 <li><strong>Hábitos de Abertura:</strong> desenvolvimento, segurança do rei, uso de peões, dama, tempos e trocas.</li>
 <li><strong>Tática / Meio Jogo heurística:</strong> riscos materiais simples detectáveis rapidamente no histórico de muitas partidas.</li>
@@ -230,7 +230,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
 <p>O app trata Tática / Meio Jogo como principal gargalo quando pelo menos uma condição ocorre:</p>
 <ul><li>nota tática média abaixo de 80;</li><li>nota tática pelo menos 8 pontos pior que Hábitos de Abertura;</li><li>15% ou mais das partidas com risco tático grave.</li></ul>
 <h3>10.1. Resumo automático em linguagem natural</h3>
-<p>A versão 7.1.9 introduziu um resumo interpretativo gerado localmente por regras. Ele não usa API externa de IA. O texto combina abertura, tática, frequência de alertas, gravidade e evolução.</p>
+<p>O app introduziu um resumo interpretativo gerado localmente por regras. Ele não usa API externa de IA. O texto combina abertura, tática, frequência de alertas, gravidade e evolução.</p>
 <h3>10.2. Comparação entre períodos</h3>
 <p>O painel compara as partidas mais recentes com o bloco imediatamente anterior. Quando possível, usa 20 jogos recentes versus 20 jogos anteriores e mostra deltas de Score Geral, Abertura, Tática / Meio Jogo e risco grave.</p>
 </section>
