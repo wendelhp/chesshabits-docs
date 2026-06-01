@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chess Habits - Documentação Metodológica v7.1.9h</title>
-<meta name="description" content="Documentação metodológica do Chess Habits v7.1.9h">
+<title>Chess Habits - Documentação Metodológica v7.2.2b</title>
+<meta name="description" content="Documentação metodológica do Chess Habits v7.2.2b">
 <style>
 :root{
   --bg:#f7f8f5; --paper:#ffffff; --ink:#17221b; --muted:#5d6a61; --brand:#276749;
@@ -35,7 +35,7 @@ code{background:var(--code);padding:2px 5px;border-radius:5px;font-size:.9em}pre
 footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);font-size:.84rem}
 @media(max-width:900px){.layout{grid-template-columns:1fr;padding:14px}nav{position:relative;top:auto;max-height:none}main{padding:23px 19px}.grid-2{grid-template-columns:1fr}.hero{padding:40px 20px 32px}}
 @media print{
-  @page{size:A4;margin:16mm 14mm 17mm; @bottom-center{content:"Chess Habits - Documentação v7.1.9h | Página " counter(page);font-size:8pt;color:#5d6a61}}
+  @page{size:A4;margin:16mm 14mm 17mm; @bottom-center{content:"Chess Habits - Documentação v7.2.2b | Página " counter(page);font-size:8pt;color:#5d6a61}}
   body{background:#fff;font-size:10.2pt;line-height:1.45}.hero{padding:18mm 0 12mm;background:#fff;color:#17221b;border-bottom:2px solid #276749}.hero-inner{max-width:none}.hero h1{font-size:28pt}.hero .subtitle{font-size:11pt}.hero .pill{border:1px solid #b9c8bf;color:#17221b;background:#fff}.actions,nav,footer{display:none}.layout{display:block;padding:0;max-width:none}main{border:0;box-shadow:none;padding:0}h2{page-break-after:avoid;margin-top:16pt;font-size:16pt}h3{page-break-after:avoid;font-size:12pt}table{font-size:8.7pt;page-break-inside:avoid}.callout,.card{page-break-inside:avoid}a{color:#276749;text-decoration:none}.grid-2{display:block}.card{margin:5pt 0}
 }
 </style>
@@ -47,7 +47,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
   <h1>Documentação Metodológica</h1>
   <p class="subtitle">Como o aplicativo avalia hábitos de abertura, <strong>Tática / Meio Jogo</strong> por heurística e análise Stockfish sob demanda.</p>
   <div class="hero-meta"><span class="pill">Versão 7.1.9h</span><span class="pill">Atualizada em 01/06/2026</span><span class="pill">Metodologia transparente e auditável</span></div>
-  <div class="actions"><a class="button" href="documentacao-metodologica-v7.1.9h.pdf">Baixar PDF</a><a class="button secondary" href="https://chesshabits.app">Abrir aplicativo</a></div>
+  <div class="actions"><a class="button" href="documentacao-metodologica-v7.2.2b.pdf">Baixar PDF</a><a class="button secondary" href="https://chesshabits.app">Abrir aplicativo</a></div>
  </div>
 </header>
 <div class="layout">
@@ -64,7 +64,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
  <a href="#indicadores">9. Indicadores do painel</a>
  <a href="#diagnostico">10. Diagnóstico e evolução</a>
  <a href="#stockfish">11. Stockfish sob demanda</a>
- <a href="#controles">12. Controles técnicos v7.1.9h</a>
+ <a href="#controles">12. Controles técnicos v7.2.2b</a>
  <a href="#limitacoes">13. Limitações</a>
  <a href="#historico">14. Histórico de versões</a>
  <a href="#resumo">15. Resumo de bolso</a>
@@ -104,10 +104,6 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
 <p>Quando o link contém <code>?username=</code>, o aplicativo extrai o username automaticamente. Quando contém apenas o ID, o usuário informa um username para localizar o PGN no histórico mensal.</p>
 <h3>2.3. Exportação</h3>
 <p>O relatório histórico e a análise de partida específica podem ser baixados em <strong>Markdown</strong> e <strong>PDF</strong>.</p>
-<h3>2.4. URL automática opcional</h3>
-<p>Existe uma opção oculta para preencher o username e iniciar a busca automaticamente:</p>
-<pre>https://chesshabits.app/?username=USUARIO&amp;auto=1</pre>
-<p>Ela serve para compartilhamentos direcionados sem poluir a interface principal. Depois da primeira busca automática da sessão, o usuário pode trocar manualmente o username.</p>
 </section>
 
 <section id="notas">
@@ -257,23 +253,25 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
 </section>
 
 <section id="controles">
-<h2>12. Controles técnicos da versão 7.1.9h</h2>
+<h2>12. Controles técnicos da versão 7.2.2b</h2>
 <h3>12.1. Revalidação efetiva do mês atual</h3>
 <p>A função interna de requisição não usa mais cache diretamente. O cache permanece apenas para dados históricos estáveis. A consulta do mês atual efetivamente realiza nova requisição e pede revalidação, reduzindo atraso causado pelo próprio app.</p>
 <h3>12.2. Limite de concorrência do Stockfish</h3>
 <p>O servidor permite no máximo <strong>uma análise Stockfish simultânea por instância</strong>. Isso protege CPU e memória em hosts pequenos. Outros usuários podem continuar navegando e usando o relatório histórico.</p>
-<h3>12.3. Modo desenvolvedor oculto</h3>
-<p>Para auditar falsos positivos da heurística tática, existe modo interno:</p>
-<pre>https://chesshabits.app/?debug=1</pre>
-<p>Ele mostra origem do alerta, confiança, risco líquido, compensação, penalidade-base, multiplicador e penalidade final.</p>
+<h3>12.3. Arquitetura modular</h3>
+<p>A partir da versão 7.2.0, a aplicação foi reorganizada em módulos próprios para configurações, API do Chess.com, hábitos de abertura, Tática / Meio Jogo, Stockfish, relatórios, notificações e interface. Essa separação facilita manutenção e testes sem alterar as fórmulas enxadrísticas.</p>
 <h3>12.4. Robustez operacional</h3>
 <p>O app usa retry leve para falhas temporárias da API, reutiliza conexões HTTP, limita caches em memória e registra duração, quantidade de partidas, retries e métricas de Stockfish nos logs.</p>
 <h3>12.5. Filtros mensais como janelas móveis</h3>
 <p>Os filtros mensais funcionam como janelas móveis aproximadas de 30 dias por mês e carregam um arquivo mensal adicional antes do corte por timestamp. Isso evita inconsistências em viradas de calendário.</p>
-<h3>12.6. Logs de produção simplificados</h3>
-<p>Em produção, o nível <code>INFO</code> mantém somente mensagens consolidadas. Detalhes de filtros ficam disponíveis em <code>DEBUG</code> por meio da variável de ambiente <code>LOG_LEVEL=DEBUG</code>.</p>
-<h3>12.7. Identidade independente</h3>
-<p>A partir da versão 7.1.9h, o produto passa a se chamar <strong>Chess Habits</strong>. Chess.com aparece apenas como fonte das partidas públicas importadas. O projeto não possui vínculo oficial com Chess.com, Chessbrah ou Aman Hambleton.</p>
+<h3>12.6. Logs de produção e privacidade</h3>
+<p>Em produção, o nível <code>INFO</code> mantém mensagens consolidadas. A análise de partida específica registra a origem da consulta, o identificador da partida quando disponível, a quantidade aproximada de lances completos e a duração. O Stockfish registra início, conclusão, indisponibilidade temporária e falhas. O aplicativo não grava PGN completo, FEN ou linha principal nos logs.</p>
+<h3>12.7. Notificações operacionais</h3>
+<p>A partir da versão 7.2.2, o aplicativo envia notificações operacionais após ações manuais relevantes: análise histórica por username, análise de partida específica e execução do Stockfish. Erros inesperados também podem gerar notificação. O envio utiliza ntfy, possui deduplicação contra reruns imediatos e duplo clique, e falhas de notificação não interrompem a aplicação.</p>
+<h3>12.8. Empacotamento e testes</h3>
+<p>A base modular inclui Dockerfile para desenvolvimento local e DigitalOcean App Platform, além de testes básicos para janela mensal móvel, validação de username e cálculo combinado.</p>
+<h3>12.9. Identidade independente</h3>
+<p>O produto se chama <strong>Chess Habits</strong>. Chess.com aparece apenas como fonte das partidas públicas importadas. O projeto não possui vínculo oficial com Chess.com, Chessbrah ou Aman Hambleton.</p>
 </section>
 
 <section id="limitacoes">
@@ -292,14 +290,18 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
 <tr><td>v7.1.4 / v7.1.5</td><td>Escala tática mais exigente e tetos intermediários de abertura.</td></tr>
 <tr><td>v7.1.6 / v7.1.7</td><td>Nomes mais claros no painel e novas faixas da consistência de abertura.</td></tr>
 <tr><td>v7.1.8</td><td>Legalidade de captura corrigida, episódios contínuos, compensação aparente e progressão apenas em perdas prováveis.</td></tr>
-<tr><td>v7.1.9</td><td>Resumo automático, comparação entre períodos, exportação PDF e URL automática opcional.</td></tr>
+<tr><td>v7.1.9</td><td>Resumo automático, comparação entre períodos e exportação PDF.</td></tr>
 <tr><td>v7.1.9a / b</td><td>Nomenclatura Tática / Meio Jogo, interface mais enxuta, limite padrão 100 e correção da troca manual de username.</td></tr>
-<tr><td>v7.1.9c</td><td>Revalidação efetiva do mês atual, uma análise Stockfish simultânea, modo debug oculto e Hash 32 MB.</td></tr>
+<tr><td>v7.1.9c</td><td>Revalidação efetiva do mês atual, uma análise Stockfish simultânea e Hash 32 MB.</td></tr>
 <tr><td>v7.1.9d</td><td>Retry leve da API, logging operacional, métricas técnicas ocultas, proteção de Stockfish e cache de PDF por sessão.</td></tr>
-<tr><td>v7.1.9e</td><td>Limites de cache em memória, conexões HTTP reutilizadas, avisos de amostra pequena, botão para limpar sessão e URL automática mais limpa.</td></tr>
+<tr><td>v7.1.9e</td><td>Limites de cache em memória, conexões HTTP reutilizadas, avisos de amostra pequena e botão para limpar sessão.</td></tr>
 <tr><td>v7.1.9f</td><td>Filtros mensais como janelas móveis, logs diagnósticos de filtros, resumo automático mais coerente e calibração tática moderada de 5%.</td></tr>
 <tr><td>v7.1.9g</td><td>Logs de produção simplificados; detalhes de filtros mantidos apenas em DEBUG.</td></tr>
 <tr><td>v7.1.9h</td><td>Rebranding para Chess Habits e aviso explícito de projeto independente, sem vínculo oficial com Chess.com, Chessbrah ou Aman Hambleton.</td></tr>
+<tr><td>v7.2.0</td><td>Refatoração modular completa, configurações centralizadas, Dockerfile e testes básicos. Nenhuma fórmula enxadrística foi alterada.</td></tr>
+<tr><td>v7.2.1</td><td>Logs consolidados para análises de partidas específicas e Stockfish, com origem da consulta, duração e proteção de dados sensíveis.</td></tr>
+<tr><td>v7.2.2</td><td>Notificações operacionais via ntfy para análises manuais, Stockfish e erros inesperados, com deduplicação contra reruns imediatos.</td></tr>
+<tr><td>v7.2.2a / b</td><td>Ajustes pontuais de compatibilidade da integração ntfy: envio em formato simples UTF-8, cabeçalhos limitados a ASCII, warnings de diagnóstico e falhas sem interrupção da aplicação.</td></tr>
 </tbody></table>
 </section>
 
@@ -311,10 +313,11 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);fon
 <li><strong>Tática histórica:</strong> captura legal, episódios contínuos, sequência jogada, perdas prováveis, exposições, compensações e riscos por peças menores.</li>
 <li><strong>Stockfish:</strong> somente na partida específica, sob demanda, com WDL e precisão estimada calibrada em 90% da média dos lances.</li>
 <li><strong>Infraestrutura inicial recomendada:</strong> 1 thread, Hash 32 MB e uma análise Stockfish simultânea por instância.</li>
+<li><strong>Operação:</strong> arquitetura modular, logs consolidados sem PGN completo ou FEN e notificações ntfy que não interrompem a aplicação em caso de falha.</li>
 </ul>
 <div class="callout"><strong>Uso recomendado:</strong> histórico para detectar hábitos recorrentes; partida específica com Stockfish para confirmar posições importantes; uma meta de treino por vez.</div>
 </section>
 </main>
 </div>
-<footer>Chess Habits - Documentação metodológica v7.1.9h - <a href="https://chesshabits.app">chesshabits.app</a><br>Projeto independente inspirado em princípios didáticos da série <em>Building Habits</em>, criada pelo GM Aman Hambleton. Não afiliado ao Chess.com, Chessbrah ou Aman Hambleton.</footer>
+<footer>Chess Habits - Documentação metodológica v7.2.2b - <a href="https://chesshabits.app">chesshabits.app</a><br>Projeto independente inspirado em princípios didáticos da série <em>Building Habits</em>, criada pelo GM Aman Hambleton. Não afiliado ao Chess.com, Chessbrah ou Aman Hambleton.</footer>
 </body></html>
