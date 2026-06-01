@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chess Habits - Documentação Metodológica v7.1.9c</title>
+<meta name="description" content="Documentação metodológica do Chess.com Building Habits v7.1.9c">
+<style>
+:root{
+  --bg:#f7f8f5; --paper:#ffffff; --ink:#17221b; --muted:#5d6a61; --brand:#276749;
+  --brand-2:#dff3e7; --line:#dfe6df; --warn:#fff6d8; --danger:#fce8e6; --code:#f1f5f2;
+  --shadow:0 10px 30px rgba(28,54,39,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
+a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+.hero{background:linear-gradient(135deg,#173c2a,#276749 62%,#31825c);color:#fff;padding:52px 28px 42px}
+.hero-inner{max-width:1180px;margin:0 auto}.kicker{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;font-weight:700}
+h1{font-size:clamp(2.15rem,5vw,4rem);line-height:1.03;margin:.35rem 0 .7rem}.subtitle{max-width:780px;font-size:1.06rem;opacity:.94;margin:0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.pill{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 11px;font-size:.82rem;background:rgba(255,255,255,.08)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.button{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1d5037;border-radius:10px;padding:10px 14px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.08)}.button.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);box-shadow:none}
+.layout{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:265px minmax(0,1fr);gap:24px;padding:24px}
+nav{position:sticky;top:16px;align-self:start;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--shadow);max-height:calc(100vh - 32px);overflow:auto}
+nav strong{display:block;margin-bottom:8px;color:#274536}nav a{display:block;font-size:.87rem;color:#486256;padding:4px 2px}nav a:hover{color:var(--brand)}
+main{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px 34px 40px;box-shadow:var(--shadow)}
+h2{font-size:1.65rem;line-height:1.2;margin:2.3rem 0 .8rem;padding-top:.3rem;border-top:1px solid var(--line)}h2:first-of-type{border-top:0;margin-top:.3rem}
+h3{font-size:1.16rem;margin:1.55rem 0 .55rem;color:#244a35}h4{font-size:1rem;margin:1.2rem 0 .45rem}
+p{margin:.6rem 0}.lead{font-size:1.05rem;color:#40554a}.small{font-size:.9rem;color:var(--muted)}
+ul,ol{padding-left:1.32rem;margin:.45rem 0}.compact li{margin:.12rem 0}
+table{width:100%;border-collapse:collapse;margin:.8rem 0 1.1rem;font-size:.92rem;overflow:hidden;border-radius:10px}th,td{border:1px solid var(--line);padding:8px 9px;vertical-align:top}th{background:#eaf5ee;text-align:left;color:#244b36}tr:nth-child(even) td{background:#fbfcfb}
+.callout{border-left:4px solid var(--brand);background:var(--brand-2);padding:12px 14px;border-radius:7px;margin:1rem 0}.callout.warn{border-color:#d99c00;background:var(--warn)}.callout.danger{border-color:#c94f44;background:var(--danger)}
+code{background:var(--code);padding:2px 5px;border-radius:5px;font-size:.9em}pre{background:#10251b;color:#eef7f1;border-radius:10px;padding:13px 15px;overflow:auto;font-size:.86rem}.formula{font-family:Georgia,serif;background:#f5f8f6;border:1px solid var(--line);padding:11px 13px;border-radius:8px;font-size:1.02rem}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfdfc}.card b{color:#28533b}
+footer{max-width:1180px;margin:0 auto;padding:0 24px 28px;color:var(--muted);font-size:.84rem}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:14px}nav{position:relative;top:auto;max-height:none}main{padding:23px 19px}.grid-2{grid-template-columns:1fr}.hero{padding:40px 20px 32px}}
+@media print{
+  @page{size:A4;margin:16mm 14mm 17mm; @bottom-center{content:"Chess Habits - Documentação v7.1.9c | Página " counter(page);font-size:8pt;color:#5d6a61}}
+  body{background:#fff;font-size:10.2pt;line-height:1.45}.hero{padding:18mm 0 12mm;background:#fff;color:#17221b;border-bottom:2px solid #276749}.hero-inner{max-width:none}.hero h1{font-size:28pt}.hero .subtitle{font-size:11pt}.hero .pill{border:1px solid #b9c8bf;color:#17221b;background:#fff}.actions,nav,footer{display:none}.layout{display:block;padding:0;max-width:none}main{border:0;box-shadow:none;padding:0}h2{page-break-after:avoid;margin-top:16pt;font-size:16pt}h3{page-break-after:avoid;font-size:12pt}table{font-size:8.7pt;page-break-inside:avoid}.callout,.card{page-break-inside:avoid}a{color:#276749;text-decoration:none}.grid-2{display:block}.card{margin:5pt 0}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="hero-inner">
+  <div class="kicker">Chess.com Building Habits</div>
+  <h1>Documentação Metodológica</h1>
+  <p class="subtitle">Como o aplicativo avalia hábitos de abertura, <strong>Tática / Meio Jogo</strong> por heurística e análise Stockfish sob demanda.</p>
+  <div class="hero-meta"><span class="pill">Versão 7.1.9c</span><span class="pill">Atualizada em 01/06/2026</span><span class="pill">Metodologia transparente e auditável</span></div>
+  <div class="actions"><a class="button" href="documentacao-metodologica-v7.1.9c.pdf">Baixar PDF</a><a class="button secondary" href="https://chesshabits.app">Abrir aplicativo</a></div>
+ </div>
+</header>
+<div class="layout">
+<nav aria-label="Sumário">
+ <strong>Sumário</strong>
+ <a href="#escopo">1. Escopo e filosofia</a>
+ <a href="#fontes">2. Fontes e modos de uso</a>
+ <a href="#notas">3. Visão geral das notas</a>
+ <a href="#abertura">4. Fórmula da abertura</a>
+ <a href="#regras-abertura">5. Regras detalhadas</a>
+ <a href="#tetos">6. Tetos por categorias graves</a>
+ <a href="#consistencia">7. Consistência da abertura</a>
+ <a href="#tatica">8. Tática / Meio Jogo heurística</a>
+ <a href="#indicadores">9. Indicadores do painel</a>
+ <a href="#diagnostico">10. Diagnóstico e evolução</a>
+ <a href="#stockfish">11. Stockfish sob demanda</a>
+ <a href="#controles">12. Controles técnicos v7.1.9c</a>
+ <a href="#limitacoes">13. Limitações</a>
+ <a href="#historico">14. Histórico de versões</a>
+ <a href="#resumo">15. Resumo de bolso</a>
+</nav>
+<main>
+<section id="escopo">
+<h2>1. Escopo e filosofia do aplicativo</h2>
+<p class="lead">O Chess.com Building Habits é um aplicativo de acompanhamento de padrões. Ele não foi criado para substituir uma engine nem para afirmar que todo lance diferente da recomendação do computador está errado.</p>
+<p>O objetivo é identificar comportamentos recorrentes que ajudam o jogador a construir uma base mais estável. A versão 7.1.9c trabalha com três camadas complementares:</p>
+<ul>
+<li><strong>Hábitos de Abertura:</strong> desenvolvimento, segurança do rei, uso de peões, dama, tempos e trocas.</li>
+<li><strong>Tática / Meio Jogo heurística:</strong> riscos materiais simples detectáveis rapidamente no histórico de muitas partidas.</li>
+<li><strong>Stockfish sob demanda:</strong> avaliação aprofundada de uma partida específica, com melhores lances, linha principal e precisão estimada própria do app.</li>
+</ul>
+<div class="callout"><strong>Regra de leitura:</strong> use o histórico para encontrar padrões. Use Stockfish em uma partida específica quando precisar confirmar se uma posição ou sequência era realmente boa ou ruim.</div>
+</section>
+
+<section id="fontes">
+<h2>2. Fontes de dados e modos de uso</h2>
+<p>O aplicativo consome partidas públicas do Chess.com e utiliza o PGN, além de informações disponíveis como username, cor, resultado, ritmo, rating do oponente, URL, ECO e horário de encerramento.</p>
+<h3>2.1. Histórico de partidas</h3>
+<p>O usuário pode filtrar por período, limite máximo de partidas, ritmo e cor. Para análises recentes, há opções em dias; para histórico maior, opções em meses.</p>
+<table><thead><tr><th>Período recente</th><th>Período histórico</th></tr></thead><tbody>
+<tr><td>Últimas 24 horas</td><td>1 mês</td></tr><tr><td>Últimos 3 dias</td><td>2 meses</td></tr><tr><td>Últimos 7 dias</td><td>3 meses</td></tr><tr><td>Últimos 14 dias</td><td>4 meses</td></tr><tr><td>Últimos 21 dias</td><td>5 e 6 meses</td></tr>
+</tbody></table>
+<p>O valor padrão é <strong>100 partidas</strong>, com limite máximo configurável de <strong>500 partidas</strong>.</p>
+<div class="callout warn"><strong>Partidas recentes:</strong> o site Chess.com pode atrasar partidas muito recentes. Caso isso aconteça, use o PGN da partida.</div>
+<h3>2.2. Partida específica</h3>
+<p>A página de partida específica aceita link público do Chess.com, PGN manual e seleção de uma partida já carregada. Links de análise e revisão são normalizados pelo ID.</p>
+<ul class="compact">
+<li><code>https://www.chess.com/game/live/169485215990?username=usuario&amp;move=0</code></li>
+<li><code>https://www.chess.com/game/live/169468938258</code></li>
+<li><code>https://www.chess.com/analysis/game/live/169468938258/review</code></li>
+<li><code>https://www.chess.com/analysis/game/live/169468938258/analysis?move=74</code></li>
+</ul>
+<p>Quando o link contém <code>?username=</code>, o aplicativo extrai o username automaticamente. Quando contém apenas o ID, o usuário informa um username para localizar o PGN no histórico mensal.</p>
+<h3>2.3. Exportação</h3>
+<p>O relatório histórico e a análise de partida específica podem ser baixados em <strong>Markdown</strong> e <strong>PDF</strong>.</p>
+<h3>2.4. URL automática opcional</h3>
+<p>Existe uma opção oculta para preencher o username e iniciar a busca automaticamente:</p>
+<pre>https://chesshabits.app/?username=USUARIO&amp;auto=1</pre>
+<p>Ela serve para compartilhamentos direcionados sem poluir a interface principal. Depois da primeira busca automática da sessão, o usuário pode trocar manualmente o username.</p>
+</section>
+
+<section id="notas">
+<h2>3. Visão geral das notas</h2>
+<div class="grid-2">
+<div class="card"><b>Hábitos de Abertura</b><br>Avalia aderência aos fundamentos didáticos. Não equivale à precisão de abertura do Chess.com.</div>
+<div class="card"><b>Tática / Meio Jogo</b><br>Avalia riscos materiais básicos por heurística conservadora. Não prova blunders: indica posições para revisão.</div>
+</div>
+<h3>3.1. Score Geral</h3>
+<p class="formula"><strong>Score Geral = 55% x Hábitos de Abertura + 45% x Tática / Meio Jogo</strong></p>
+<p>Exemplo: abertura 80 e tática 90 geram score geral 84,5.</p>
+</section>
+
+<section id="abertura">
+<h2>4. Hábitos de abertura: fórmula e pesos</h2>
+<p>Cada sub-score começa em 100. O sistema desconta pontos quando identifica desvios e calcula uma média ponderada.</p>
+<table><thead><tr><th>Categoria</th><th>Peso</th></tr></thead><tbody>
+<tr><td>Desenvolvimento das peças</td><td>28%</td></tr><tr><td>Segurança do rei</td><td>22%</td></tr><tr><td>Disciplina de peões</td><td>17%</td></tr><tr><td>Dama cedo</td><td>13%</td></tr><tr><td>Perda de tempo na abertura</td><td>12%</td></tr><tr><td>Trocas precoces</td><td>8%</td></tr>
+</tbody></table>
+<p class="formula"><strong>Abertura = 0,28D + 0,22R + 0,17P + 0,13Q + 0,12T + 0,08C</strong></p>
+<p>Depois da média ponderada, problemas graves podem impor tetos. O app conta no máximo uma categoria grave de cada tipo para evitar punições duplicadas pelo mesmo problema central.</p>
+</section>
+
+<section id="regras-abertura">
+<h2>5. Regras detalhadas da abertura</h2>
+<h3>5.1. Desenvolvimento das peças</h3>
+<table><thead><tr><th>Situação até o lance 6</th><th>Penalidade</th><th>Gravidade</th></tr></thead><tbody>
+<tr><td>Nenhuma peça menor diferente desenvolvida</td><td>-37</td><td>Grave</td></tr><tr><td>Apenas 1 peça menor diferente</td><td>-29</td><td>Grave</td></tr><tr><td>Exatamente 2 peças menores diferentes</td><td>-11</td><td>Leve</td></tr><tr><td>3 ou mais</td><td>0</td><td>Bom padrão</td></tr>
+</tbody></table>
+<h3>5.2. Bispo antes dos cavalos</h3>
+<p>É uma preferência didática, não uma regra universal de teoria. Nunca vira erro grave isoladamente.</p>
+<table><thead><tr><th>Situação</th><th>Penalidade</th><th>Leitura</th></tr></thead><tbody>
+<tr><td>Bispo antes dos cavalos, isoladamente</td><td>-5</td><td>Informativo</td></tr><tr><td>Bispo antes dos cavalos + alguns lances de peão</td><td>-7</td><td>Leve</td></tr><tr><td>Bispo antes dos cavalos + abertura lenta ou dama cedo</td><td>-9</td><td>Médio</td></tr>
+</tbody></table>
+<h3>5.3. Segurança do rei</h3>
+<table><thead><tr><th>Situação</th><th>Penalidade</th><th>Gravidade</th></tr></thead><tbody>
+<tr><td>Sem roque até o lance 10</td><td>-12</td><td>Médio</td></tr><tr><td>Sem roque + peões próximos do rei movidos cedo</td><td>-11 adicional</td><td>Grave</td></tr><tr><td>Sem roque + dama ativa cedo</td><td>-9 adicional</td><td>Médio</td></tr><tr><td>Sem roque + menos de 2 peças menores desenvolvidas</td><td>-9 adicional</td><td>Médio</td></tr>
+</tbody></table>
+<h3>5.4. Disciplina de peões</h3>
+<table><thead><tr><th>Situação</th><th>Penalidade</th><th>Gravidade</th></tr></thead><tbody>
+<tr><td>3 lances de peão nos 6 primeiros</td><td>-11</td><td>Leve</td></tr><tr><td>4 lances de peão com algum desenvolvimento</td><td>-12 em peões e -4 em desenvolvimento</td><td>Médio</td></tr><tr><td>4 lances de peão sem desenvolver peça menor</td><td>-18 em peões e -7 em desenvolvimento</td><td>Grave</td></tr><tr><td>5 ou mais lances de peão</td><td>-29 em peões e -11 em desenvolvimento</td><td>Grave</td></tr><tr><td>Peões A/H cedo</td><td>-13</td><td>Médio</td></tr><tr><td>Peões F/G antes do roque</td><td>-18 em peões e -11 em rei</td><td>Grave</td></tr>
+</tbody></table>
+<h3>5.5. Dama cedo</h3>
+<table><thead><tr><th>Situação</th><th>Penalidade</th><th>Gravidade</th></tr></thead><tbody>
+<tr><td>Dama antes de 2 peças menores, sem ser recaptura</td><td>-28 em dama e -5 em desenvolvimento</td><td>Grave</td></tr><tr><td>Dama cedo por recaptura natural</td><td>-4</td><td>Informativo</td></tr><tr><td>Dama nos 10 primeiros lances em outro caso</td><td>-8</td><td>Leve</td></tr><tr><td>Dama antes do roque, sem ser recaptura</td><td>-13 em dama e -6 em rei</td><td>Médio</td></tr><tr><td>Dama movida duas vezes</td><td>-10 em dama e -3 em perda de tempo</td><td>Médio</td></tr><tr><td>Dama movida três ou mais vezes</td><td>-18 em dama e -5 em perda de tempo</td><td>Grave</td></tr>
+</tbody></table>
+<h3>5.6. Trocas precoces</h3>
+<table><thead><tr><th>Situação</th><th>Penalidade</th><th>Gravidade</th></tr></thead><tbody>
+<tr><td>1 captura não natural cedo com menos de 2 peças desenvolvidas</td><td>-11 em trocas e -4 em desenvolvimento</td><td>Médio</td></tr><tr><td>2 ou mais capturas não naturais nos 5 primeiros lances</td><td>-15</td><td>Médio</td></tr><tr><td>3 ou mais capturas não naturais antes do roque nos 10 primeiros</td><td>-20 em trocas e -7 em rei</td><td>Grave</td></tr><tr><td>Peça já movida volta a capturar cedo</td><td>-9 em trocas e -2 em perda de tempo</td><td>Leve</td></tr>
+</tbody></table>
+<h3>5.7. Perda de tempo</h3>
+<table><thead><tr><th>Situação</th><th>Penalidade</th><th>Gravidade</th></tr></thead><tbody>
+<tr><td>Mesma peça movida 2 vezes nos 6 primeiros</td><td>-4</td><td>Leve</td></tr><tr><td>Mesma peça movida 3 vezes nos 10 primeiros</td><td>-14 em tempos e -4 em desenvolvimento</td><td>Grave</td></tr><tr><td>Mesma peça movida 4 ou mais vezes</td><td>-24 em tempos e -4 em desenvolvimento</td><td>Grave forte</td></tr>
+</tbody></table>
+<h3>5.8. Bônus por execução limpa</h3>
+<p>O app concede +2 em Desenvolvimento e +2 em Segurança do Rei quando o jogador fez roque, desenvolveu pelo menos 3 peças menores, não moveu a dama, fez no máximo 3 lances de peão cedo e não moveu a mesma peça 3 ou mais vezes.</p>
+</section>
+
+<section id="tetos">
+<h2>6. Tetos por categorias graves</h2>
+<p>Aberturas com problemas graves recebem teto depois da média ponderada. O teto usa categorias graves únicas, não o número bruto de mensagens.</p>
+<div class="grid-2">
+<table><thead><tr><th>Categorias graves únicas</th><th>Nota máxima</th></tr></thead><tbody><tr><td>1</td><td>85</td></tr><tr><td>2</td><td>74</td></tr><tr><td>3</td><td>63</td></tr><tr><td>4 ou mais</td><td>52</td></tr></tbody></table>
+<table><thead><tr><th>Categoria grave específica</th><th>Nota máxima</th></tr></thead><tbody><tr><td>Rei vulnerável com agravante</td><td>85</td></tr><tr><td>Dama cedo grave</td><td>82</td></tr><tr><td>Desenvolvimento insuficiente grave</td><td>75</td></tr><tr><td>Excesso grave de peões cedo</td><td>78</td></tr><tr><td>Perda de tempo grave</td><td>85</td></tr></tbody></table>
+</div>
+<div class="callout"><strong>Exemplo:</strong> se o score ponderado for 88, mas houver 2 categorias graves únicas, a nota final será limitada a 74.</div>
+</section>
+
+<section id="consistencia">
+<h2>7. Consistência dos hábitos de abertura</h2>
+<p>O indicador de consistência usa somente Hábitos de Abertura. Ele não inclui Tática / Meio Jogo e não deve ser interpretado como avaliação global.</p>
+<table><thead><tr><th>Faixa de abertura</th><th>Grupo exibido</th></tr></thead><tbody><tr><td>85 ou mais</td><td>Aberturas disciplinadas</td></tr><tr><td>70 a 84</td><td>Aberturas com atenção</td></tr><tr><td>Abaixo de 70</td><td>Aberturas para revisar</td></tr></tbody></table>
+</section>
+
+<section id="tatica">
+<h2>8. Tática / Meio Jogo heurística</h2>
+<p>A análise histórica não usa Stockfish. Ela observa riscos materiais simples depois dos lances do jogador e tenta reduzir falsos positivos com legalidade de captura, episódios contínuos e contexto da sequência realmente jogada.</p>
+<div class="callout warn"><strong>Importante:</strong> a nota tática é uma heurística de revisão. Ela não prova que um sacrifício era errado nem substitui engine.</div>
+<h3>8.1. Valores das peças</h3>
+<table><thead><tr><th>Peça</th><th>Valor</th></tr></thead><tbody><tr><td>Peão</td><td>1</td></tr><tr><td>Cavalo</td><td>3</td></tr><tr><td>Bispo</td><td>3,1</td></tr><tr><td>Torre</td><td>5</td></tr><tr><td>Dama</td><td>9</td></tr></tbody></table>
+<p>O bispo vale 3,1 para diferenciá-lo levemente do cavalo, seguindo a dica do GM Krikor.</p>
+<h3>8.2. Captura legal e episódios contínuos</h3>
+<p>O app verifica captura legal, não apenas ataque geométrico. Usa uma cópia temporária do tabuleiro e ajusta corretamente o turno do atacante. A mesma exposição contínua conta uma vez; se a peça ficar segura e depois voltar a ficar exposta, um novo episódio pode ser registrado.</p>
+<table><thead><tr><th>Sequência</th><th>Contagem</th></tr></thead><tbody><tr><td>Torre exposta e permanece exposta no lance seguinte</td><td>1 episódio</td></tr><tr><td>Torre exposta, fica segura e depois volta a ficar exposta</td><td>2 episódios</td></tr></tbody></table>
+<h3>8.3. Tipos de alerta</h3>
+<table><thead><tr><th>Tipo</th><th>Definição</th><th>Pontua?</th></tr></thead><tbody>
+<tr><td>Perda material provável</td><td>Peça exposta, capturada na sequência sem compensação material aparente suficiente.</td><td>Sim, forte</td></tr>
+<tr><td>Peça exposta para revisão</td><td>Peça sob captura legal e sem defensor visível, mas não capturada na janela analisada.</td><td>Sim, leve</td></tr>
+<tr><td>Compensação aparente</td><td>Peça capturada, porém a sequência recupera material semelhante.</td><td>Não</td></tr>
+<tr><td>Risco tático relevante</td><td>Peça atacada por peça de menor valor com diferença >= 1,5 e pouca defesa.</td><td>Sim, moderado</td></tr>
+<tr><td>Tensão informativa</td><td>Risco insuficiente para penalizar com confiança.</td><td>Não</td></tr>
+</tbody></table>
+<h3>8.4. Penalidades-base</h3>
+<table><thead><tr><th>Tipo de alerta</th><th>Dama</th><th>Torre</th><th>Cavalo ou bispo</th></tr></thead><tbody>
+<tr><td>Perda material provável</td><td>-35</td><td>-25</td><td>-18</td></tr><tr><td>Peça exposta, mas não capturada</td><td>-12</td><td>-8</td><td>-6</td></tr><tr><td>Risco por atacante de menor valor</td><td>-8</td><td>-6</td><td>-3</td></tr><tr><td>Tensão ou compensação informativa</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody></table>
+<h3>8.5. Progressão por reincidência</h3>
+<p>O multiplicador vale somente para perdas materiais prováveis sem compensação. Exposições e vulnerabilidades leves não aumentam a progressão.</p>
+<table><thead><tr><th>Perda material provável confirmada</th><th>Multiplicador</th></tr></thead><tbody><tr><td>1ª</td><td>1,00</td></tr><tr><td>2ª</td><td>1,00</td></tr><tr><td>3ª</td><td>1,20</td></tr><tr><td>4ª</td><td>1,40</td></tr><tr><td>5ª ou posterior</td><td>1,60</td></tr></tbody></table>
+<p class="formula"><strong>Tática / Meio Jogo = max(0, 100 - soma das penalidades ajustadas)</strong></p>
+<h3>8.6. Nível de risco por partida</h3>
+<table><thead><tr><th>Penalidade total</th><th>Nível</th></tr></thead><tbody><tr><td>0</td><td>Sem alerta</td></tr><tr><td>1 a 9</td><td>Leve</td></tr><tr><td>10 a 24</td><td>Moderado</td></tr><tr><td>25 ou mais</td><td>Grave</td></tr></tbody></table>
+</section>
+
+<section id="indicadores">
+<h2>9. Indicadores táticos do painel</h2>
+<table><thead><tr><th>Indicador</th><th>O que significa</th></tr></thead><tbody>
+<tr><td>Tática / Meio Jogo</td><td>Nota média das partidas: 100 menos o impacto calculado em cada jogo.</td></tr>
+<tr><td>Jogos com perda provável</td><td>Percentual de partidas com pelo menos uma perda material provável.</td></tr>
+<tr><td>Perdas materiais prováveis</td><td>Quantidade total de perdas materiais prováveis detectadas.</td></tr>
+<tr><td>Peças expostas</td><td>Peças sob captura legal que não foram capturadas imediatamente.</td></tr>
+<tr><td>Peças vulneráveis</td><td>Riscos relevantes contra peça de menor valor.</td></tr>
+<tr><td>Compensações aparentes</td><td>Sequências em que material semelhante foi recuperado.</td></tr>
+<tr><td>Impacto tático por jogo</td><td>Pontos perdidos em média considerando todas as partidas.</td></tr>
+<tr><td>Impacto quando há erro</td><td>Penalidade média apenas nas partidas com algum risco relevante.</td></tr>
+<tr><td>Jogos com risco grave</td><td>Percentual de partidas com penalidade total de 25 ou mais.</td></tr>
+<tr><td>Jogos sem alertas</td><td>Percentual de jogos sem risco pontuável.</td></tr>
+</tbody></table>
+<p>Leitura conjunta recomendada: frequência mostra quantas partidas têm problema; severidade mostra quanto os problemas custam quando aparecem.</p>
+</section>
+
+<section id="diagnostico">
+<h2>10. Diagnóstico principal, resumo automático e evolução</h2>
+<p>O app trata Tática / Meio Jogo como principal gargalo quando pelo menos uma condição ocorre:</p>
+<ul><li>nota tática média abaixo de 80;</li><li>nota tática pelo menos 8 pontos pior que Hábitos de Abertura;</li><li>15% ou mais das partidas com risco tático grave.</li></ul>
+<h3>10.1. Resumo automático em linguagem natural</h3>
+<p>A versão 7.1.9 introduziu um resumo interpretativo gerado localmente por regras. Ele não usa API externa de IA. O texto combina abertura, tática, frequência de alertas, gravidade e evolução.</p>
+<h3>10.2. Comparação entre períodos</h3>
+<p>O painel compara as partidas mais recentes com o bloco imediatamente anterior. Quando possível, usa 20 jogos recentes versus 20 jogos anteriores e mostra deltas de Score Geral, Abertura, Tática / Meio Jogo e risco grave.</p>
+</section>
+
+<section id="stockfish">
+<h2>11. Stockfish na partida específica</h2>
+<p>Stockfish roda somente sob demanda na página de partida específica. O relatório histórico permanece leve para evitar lentidão em lotes grandes.</p>
+<h3>11.1. Configuração inicial</h3>
+<table><thead><tr><th>Opção</th><th>Configuração</th></tr></thead><tbody><tr><td>Threads</td><td>1</td></tr><tr><td>Hash</td><td>32 MB</td></tr><tr><td>Linha principal curta</td><td>Até 6 lances</td></tr><tr><td>Rápida</td><td>80 ms por posição</td></tr><tr><td>Normal</td><td>150 ms por posição</td></tr><tr><td>Detalhada</td><td>300 ms por posição</td></tr></tbody></table>
+<h3>11.2. Avaliações exibidas</h3>
+<ul><li>avaliação antes e depois;</li><li>perda em centipawns convertida para peões;</li><li>expectativa WDL antes e depois;</li><li>melhor lance sugerido;</li><li>linha principal curta;</li><li>profundidade aproximada;</li><li>imprecisões, erros e blunders.</li></ul>
+<h3>11.3. Precisão Stockfish Estimada</h3>
+<p class="formula"><strong>Perda prática = max(0, expectativa antes - expectativa depois)</strong></p>
+<p class="formula"><strong>Precisão do lance = 100 x exp(-5 x perda prática)</strong></p>
+<p class="formula"><strong>Precisão Stockfish Estimada = média das precisões dos lances x 0,90</strong></p>
+<p>A nota é própria e transparente. Ela pode diferir do Chess.com porque as metodologias não são idênticas. O Chess.com informa que seu modelo de pontos esperados considera avaliação da engine e rating do jogador; este app usa Stockfish local e perda de expectativa WDL para comparação interna.</p>
+<h3>11.4. Classificação por perda WDL</h3>
+<table><thead><tr><th>Perda prática de expectativa</th><th>Classificação</th></tr></thead><tbody><tr><td>Abaixo de 5 p.p.</td><td>Normal</td></tr><tr><td>5 a 9,99 p.p.</td><td>Imprecisão</td></tr><tr><td>10 a 19,99 p.p.</td><td>Erro</td></tr><tr><td>20 p.p. ou mais</td><td>Blunder</td></tr></tbody></table>
+<p>Mate permitido ou desperdiçado recebe tratamento específico como blunder.</p>
+</section>
+
+<section id="controles">
+<h2>12. Controles técnicos da versão 7.1.9c</h2>
+<h3>12.1. Revalidação efetiva do mês atual</h3>
+<p>A função interna de requisição não usa mais cache diretamente. O cache permanece apenas para dados históricos estáveis. A consulta do mês atual efetivamente realiza nova requisição e pede revalidação, reduzindo atraso causado pelo próprio app.</p>
+<h3>12.2. Limite de concorrência do Stockfish</h3>
+<p>O servidor permite no máximo <strong>uma análise Stockfish simultânea por instância</strong>. Isso protege CPU e memória em hosts pequenos. Outros usuários podem continuar navegando e usando o relatório histórico.</p>
+<h3>12.3. Modo desenvolvedor oculto</h3>
+<p>Para auditar falsos positivos da heurística tática, existe modo interno:</p>
+<pre>https://chesshabits.app/?debug=1</pre>
+<p>Ele mostra origem do alerta, confiança, risco líquido, compensação, penalidade-base, multiplicador e penalidade final.</p>
+</section>
+
+<section id="limitacoes">
+<h2>13. Limitações e interpretação responsável</h2>
+<p>A análise histórica é intencionalmente simples. Mesmo na versão atual, existem situações que exigem revisão humana ou Stockfish:</p>
+<ul><li>sacrifícios corretos;</li><li>defesas indiretas por tática;</li><li>compensação posicional;</li><li>sequências forçadas maiores do que a janela observada;</li><li>posições caóticas de bullet;</li><li>combinações de mate;</li><li>lances teóricos que quebram hábitos didáticos por motivo válido.</li></ul>
+<p>O relatório deve ser usado como detector de padrões. Uma única partida não define o jogador.</p>
+</section>
+
+<section id="historico">
+<h2>14. Histórico resumido de alterações</h2>
+<table><thead><tr><th>Versão</th><th>Mudança principal</th></tr></thead><tbody>
+<tr><td>v7.0 / v7.0.1</td><td>Filtro por dias, partida específica, busca por link e normalização de IDs.</td></tr>
+<tr><td>v7.1</td><td>Stockfish local sob demanda somente na partida específica.</td></tr>
+<tr><td>v7.1.2</td><td>Recalibração da abertura com categorias graves únicas e nota Stockfish baseada em WDL.</td></tr>
+<tr><td>v7.1.4 / v7.1.5</td><td>Escala tática mais exigente e tetos intermediários de abertura.</td></tr>
+<tr><td>v7.1.6 / v7.1.7</td><td>Nomes mais claros no painel e novas faixas da consistência de abertura.</td></tr>
+<tr><td>v7.1.8</td><td>Legalidade de captura corrigida, episódios contínuos, compensação aparente e progressão apenas em perdas prováveis.</td></tr>
+<tr><td>v7.1.9</td><td>Resumo automático, comparação entre períodos, exportação PDF e URL automática opcional.</td></tr>
+<tr><td>v7.1.9a / b</td><td>Nomenclatura Tática / Meio Jogo, interface mais enxuta, limite padrão 100 e correção da troca manual de username.</td></tr>
+<tr><td>v7.1.9c</td><td>Revalidação efetiva do mês atual, uma análise Stockfish simultânea, modo debug oculto e Hash 32 MB.</td></tr>
+</tbody></table>
+</section>
+
+<section id="resumo">
+<h2>15. Resumo de bolso</h2>
+<ul>
+<li><strong>Score Geral:</strong> 55% abertura + 45% Tática / Meio Jogo.</li>
+<li><strong>Abertura:</strong> desenvolvimento, segurança do rei, disciplina de peões, dama cedo, perda de tempo e trocas precoces.</li>
+<li><strong>Tática histórica:</strong> captura legal, episódios contínuos, sequência jogada, perdas prováveis, exposições, compensações e riscos por peças menores.</li>
+<li><strong>Stockfish:</strong> somente na partida específica, sob demanda, com WDL e precisão estimada calibrada em 90% da média dos lances.</li>
+<li><strong>Infraestrutura inicial recomendada:</strong> 1 thread, Hash 32 MB e uma análise Stockfish simultânea por instância.</li>
+</ul>
+<div class="callout"><strong>Uso recomendado:</strong> histórico para detectar hábitos recorrentes; partida específica com Stockfish para confirmar posições importantes; uma meta de treino por vez.</div>
+</section>
+</main>
+</div>
+<footer>Chess Habits - Documentação metodológica v7.1.9c - <a href="https://chesshabits.app">chesshabits.app</a></footer>
+</body></html>
